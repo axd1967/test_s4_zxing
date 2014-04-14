@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.List;
+
 
 public class ScanActivity extends Activity {
 
@@ -20,7 +22,9 @@ public class ScanActivity extends Activity {
 
     private void startScan() {
         IntentIntegrator ii = new IntentIntegrator(this);
-        ii.initiateScan();
+
+        ii.initiateScan(IntentIntegrator.ONE_D_CODE_TYPES);
+        //ii.initiateScan();
     }
 
     ////////////////////////////////////////
@@ -60,10 +64,13 @@ public class ScanActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
 
         IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+
         if (scanResult != null) {
         // handle scan result
+
             String str = scanResult.toString();
             Log.d(TAG, str);
+
         }
         else {
             // else continue with any other code you need in the method
